@@ -2,24 +2,33 @@ package ar.edu.unlam.hospital;
 
 public class Paciente {
 	
-	protected Integer id;
+	protected Integer idPaciente;
 	protected String nombre;
 	protected String diagnostico;
+	protected PlatoDeComida platoDeComida;
 	
 	
 	public Paciente(Integer id, String nombre, String diagnostico) {
-		this.id = id;
+		this.idPaciente = id;
 		this.nombre = nombre;
 		this.diagnostico = diagnostico;
+		this.platoDeComida = null;
 	}
 
+	public PlatoDeComida getComida() {
+		return platoDeComida;
+	}
+
+	public void setPlatoDeComida(PlatoDeComida comida) {
+		this.platoDeComida = comida;
+	}
 
 	public Integer getId() {
-		return id;
+		return idPaciente;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idPaciente = id;
 	}
 
 	public String getNombre() {
@@ -34,7 +43,7 @@ public class Paciente {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idPaciente == null) ? 0 : idPaciente.hashCode());
 		return result;
 	}
 
@@ -47,14 +56,13 @@ public class Paciente {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (idPaciente == null) {
+			if (other.idPaciente != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!idPaciente.equals(other.idPaciente))
 			return false;
 		return true;
 	}
-	
-	
-	
+
+
 }

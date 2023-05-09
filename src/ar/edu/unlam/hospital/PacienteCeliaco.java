@@ -8,6 +8,14 @@ public class PacienteCeliaco extends Paciente {
 		super(id, nombre, diagnostico);
 		this.puedeComerAlimentosConGluten = false;
 	}
+
+	public boolean isPuedeComerAlimentosConGluten() {
+		return puedeComerAlimentosConGluten;
+	}
+
+	public void setPuedeComerAlimentosConGluten(boolean puedeComerAlimentosConGluten) {
+		this.puedeComerAlimentosConGluten = puedeComerAlimentosConGluten;
+	}
 	
 	
 

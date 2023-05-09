@@ -9,6 +9,14 @@ public class PacienteDiabetico extends Paciente {
 		
 		this.puedeComerAzucar = false;
 	}
+
+	public boolean isPuedeComerAzucar() {
+		return puedeComerAzucar;
+	}
+
+	public void setPuedeComerAzucar(boolean puedeComerAzucar) {
+		this.puedeComerAzucar = puedeComerAzucar;
+	}
 	
 	
 	

@@ -8,6 +8,14 @@ public class PacienteHipertenso extends Paciente {
 		super(id, nombre, diagnostico);
 		this.puedeComerSal = false;
 	}
+
+	public boolean isPuedeComerSal() {
+		return puedeComerSal;
+	}
+
+	public void setPuedeComerSal(boolean puedeComerSal) {
+		this.puedeComerSal = puedeComerSal;
+	}
 	
 	
 	

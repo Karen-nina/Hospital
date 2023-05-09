@@ -9,79 +9,75 @@ import org.junit.Test;
 public class testHospital {
 
 	@Test
-	public void agregarPaciente() {
-		Hospital h = null;
+	public void queSePuedaAgregarPacienteAHospital() {
+		Hospital hospital;
 		Paciente paciente;
 		
-		String nombre = "Rocio";
-		Integer id = 1;
+		String nombreH = "Duran";
+		String nombreP = "Rocio";
+		Integer idPaciente = 1;
+		String dx = "infeccion";
 		
-		h = new Hospital();
-		paciente = new Paciente(id,nombre);
+		hospital = new Hospital(nombreH);
+		paciente = new Paciente(idPaciente,nombreP, dx);
 		
-		h.agregarPaciente(paciente);
+		hospital.agregarPaciente(paciente);
 		
-		assertFalse(h.generales.isEmpty());
+		assertFalse(hospital.generales.isEmpty());
 	}
 	
 	@Test
-	public void agregarPlato() {
-		Hospital h = null;
-		PlatoDeComida plato;
+	public void queSePuedaAgregarPlatoAHospital() {
+		Hospital hospital;
+		String nombreH = "Duran";
 		
-		String nombre = "Fideos con tuco";
-		Integer id = 1;
+		PlatoDeComida plato;
+		Integer idC = 1;
+		String nombreC = "Fideos con tuco";
 		FormaDeCoccion tipo = FormaDeCoccion.HORNO;
 		HashSet<Ingrediente> ingredientes = new HashSet<>();
 		
-		ingredientes.add(Ingrediente.SAL);
+		ingredientes.add(Ingrediente.FRUTAS);
 		
-		h = new Hospital();
-		plato = new PlatoDeComida(id,nombre,tipo,ingredientes);
+		hospital = new Hospital(nombreH);
+		plato = new PlatoDeComida(idC,nombreH ,tipo ,ingredientes);
 		
-		h.agregarPlato(plato);
+		hospital.agregarPlatoDeComida(plato);
 		
-		assertFalse(h.menu.isEmpty());
+		assertFalse(hospital.listaDePlatos.isEmpty());
 	}
 	
-	@Test
-	public void agregarPeswaciente() {
-		Hospital h = null;
-		Paciente paciente;
-		
-		String nombre = "Rocio";
-		Integer id = 1;
-		
-		h = new Hospital();
-		paciente = new Paciente(id,nombre);
-		
-		h.agregarPaciente(paciente);
-		
-		assertFalse(h.generales.isEmpty());
-	}
 	
 	@Test
-	public void asignarPlatoAPacienteGeneral() {
-		Hospital h;
+	public void queSePuedaAsignarPlatoAPacienteGeneral() {
+		Hospital hospital;
+		String nombreH = "Duran";
+		
 		PlatoDeComida plato;
-		Paciente paciente;
-		
-		String nombre = "Matias";
-		Integer id = 1;
-		String nombrePlato = "Milanesas con ensalada";
-		Integer idPlato = 1;
-		
-		h = new Hospital();
-		paciente = new Paciente(id,nombre);
-		FormaDeCoccion tipoCoccion = FormaDeCoccion.HORNO;
+		Integer idC = 1;
+		String nombreC = "Fideos con tuco";
+		FormaDeCoccion tipo = FormaDeCoccion.HORNO;
 		HashSet<Ingrediente> ingredientes = new HashSet<>();
-		ingredientes.add(Ingrediente.SAL);
-		ingredientes.add(Ingrediente.VERDURAS);
-		plato = new PlatoDeComida(idPlato,nombrePlato,tipoCoccion,ingredientes);
-		h.agregarPlato(plato);
 		
-		h.asignarPlato(paciente, plato);
-		assertEquals(plato , h.buscarPlatoDelPaciente(id));
+		ingredientes.add(Ingrediente.FRUTAS);
+		
+		hospital = new Hospital(nombreH);
+		plato = new PlatoDeComida(idC,nombreH ,tipo ,ingredientes);
+		
+		hospital.agregarPlatoDeComida(plato);
+		
+		Paciente paciente;
+		String nombreP = "Rocio";
+		Integer idPaciente = 1;
+		String dx = "infeccion";
+	
+		paciente = new Paciente(idPaciente,nombreP, dx);
+		
+		hospital.agregarPaciente(paciente);
+		
+		hospital.asignarPlatoaPacienteGeneral(paciente, plato);
+		
+		assertEquals(plato , hospital.buscarPacientePorId(idPaciente).getComida());
 	}
 
 }
