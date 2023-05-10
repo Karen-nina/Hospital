@@ -47,6 +47,8 @@ public class Hospital {
 		} 
 		return null;
 	}
+	
+	
 		
 	public boolean asignarPlatoaPacienteGeneral(Paciente paciente, PlatoDeComida comida) {
 		if (paciente.getComida() == null) {
@@ -55,6 +57,38 @@ public class Hospital {
 		}
 		return false;
 	}
+	public boolean asignarPlatoaPacienteOncologico(PacienteOncologico paciente, PlatoDeComida comida) {
+		if (paciente.getComida() == null && comida.getTipo().equals(FormaDeCoccion.SIN_COCCION)) {
+			paciente.setPlatoDeComida(comida);
+			return true;
+		}
+		return false;
+	}
+	public boolean asignarPlatoaPacienteDiabetico(PacienteDiabetico paciente, PlatoDeComida comida) {
+		if (paciente.getComida() == null && !comida.getIngredientes().contains(Ingrediente.AZUCAR)) {
+			paciente.setPlatoDeComida(comida);
+			return true;
+		}
+		return false;
+	}
+	public boolean asignarPlatoaPacienteCeliaco(PacienteCeliaco paciente, PlatoDeComida comida) {
+		if (paciente.getComida() == null && !comida.getIngredientes().contains(Ingrediente.CEBADA)
+				|| !comida.getIngredientes().contains(Ingrediente.AVENA)
+				|| !comida.getIngredientes().contains(Ingrediente.CENTENO)
+				|| !comida.getIngredientes().contains(Ingrediente.TRIGO)) {
+			paciente.setPlatoDeComida(comida);
+			return true;
+		}
+		return false;
+	}
+	public boolean asignarPlatoaPacienteHipertenso(PacienteHipertenso paciente, PlatoDeComida comida) {
+		if (paciente.getComida() == null && !comida.getIngredientes().contains(Ingrediente.SAL)) {
+			paciente.setPlatoDeComida(comida);
+			return true;
+		}
+		return false;
+	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -110,6 +144,11 @@ public class Hospital {
 
 	public void setListaDePlatos(HashSet<PlatoDeComida> listaDePlatos) {
 		this.listaDePlatos = listaDePlatos;
+	}
+	public PlatoDeComida obtenerPlatoAsignadoAPaciente(Paciente paciente) {
+		Paciente pacienteD = buscarPacientePorId(paciente.getId());
+		return pacienteD.getComida();
+		
 	}
 	
 

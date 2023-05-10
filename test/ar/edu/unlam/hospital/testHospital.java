@@ -46,8 +46,7 @@ public class testHospital {
 		
 		assertFalse(hospital.listaDePlatos.isEmpty());
 	}
-	
-	
+
 	@Test
 	public void queSePuedaAsignarPlatoAPacienteGeneral() {
 		Hospital hospital;
@@ -62,7 +61,7 @@ public class testHospital {
 		ingredientes.add(Ingrediente.FRUTAS);
 		
 		hospital = new Hospital(nombreH);
-		plato = new PlatoDeComida(idC,nombreH ,tipo ,ingredientes);
+		plato = new PlatoDeComida(idC, nombreC ,tipo ,ingredientes);
 		
 		hospital.agregarPlatoDeComida(plato);
 		
@@ -77,7 +76,53 @@ public class testHospital {
 		
 		hospital.asignarPlatoaPacienteGeneral(paciente, plato);
 		
-		assertEquals(plato , hospital.buscarPacientePorId(idPaciente).getComida());
+		assertEquals(plato, hospital.buscarPacientePorId(idPaciente).getComida());
 	}
-
+	
+	@Test
+	public void queElPlatoAsignadoAPacienteDiabeticoNoContengaAzucar() {
+		Hospital hospital;
+		String nombreH = "Duran";
+		
+		PlatoDeComida plato;
+		Integer idC = 1;
+		String nombreC = "Fideos con tuco";
+		FormaDeCoccion tipo = FormaDeCoccion.HORNO;
+		HashSet<Ingrediente> ingredientes = new HashSet<>();
+		
+		ingredientes.add(Ingrediente.VERDURAS);
+		
+		hospital = new Hospital(nombreH);
+		plato = new PlatoDeComida(idC, nombreC ,tipo ,ingredientes);
+		
+		hospital.agregarPlatoDeComida(plato);
+		
+		PacienteDiabetico paciente;
+		String nombreP = "Rocio";
+		Integer idPaciente = 1;
+		String dx = "infeccion";
+	
+		paciente = new PacienteDiabetico(idPaciente,nombreP, dx);
+		
+		hospital.agregarPaciente(paciente);
+		
+		hospital.asignarPlatoaPacienteDiabetico(paciente, plato);
+		
+		hospital.obtenerPlatoAsignadoAPaciente(paciente);
+		
+		assertNotSame(Ingrediente.AZUCAR, hospital.obtenerPlatoAsignadoAPaciente(paciente).getIngredientes());
+	}
+	@Test
+	public void queElPlatoAsignadoAPacienteCeliacoNoContengaGluten() {
+		
+	}
+	@Test
+	public void queElPlatoAsignadoAPacienteHipertensoNoContengaSal() {
+		
+	}
+	@Test
+	public void queElPlatoAsignadoAPacienteOncologicoNoContengaCrudos() {
+		
+	}
+	
 }
